@@ -1,7 +1,7 @@
-import React from "react";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import SvgIconsSize from "../iconsCard";
+
+import { MdOutlineAccountBalanceWallet } from "react-icons/md";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,13 +27,25 @@ export default function SimplePaper() {
   return (
     <div className={classes.root}>
       <Paper elevation={3}>
-        <SvgIconsSize />
+        <MdOutlineAccountBalanceWallet
+          fontSize="60px"
+          color="purple"
+          cursor="pointer"
+        />
       </Paper>
       <Paper elevation={3}>
-        <SvgIconsSize />
+        <MdOutlineAccountBalanceWallet
+          fontSize="60px"
+          color="purple"
+          cursor="pointer"
+        />
       </Paper>
       <Paper elevation={3}>
-        <SvgIconsSize />
+        <MdOutlineAccountBalanceWallet
+          fontSize="60px"
+          color="purple"
+          cursor="pointer"
+        />
       </Paper>
     </div>
   );

@@ -1,8 +1,7 @@
-import { Box, Avatar, Button, TextField } from "@mui/material";
+import { Box, Avatar } from "@mui/material";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../../providers/login";
-import { BootstrapButton } from "../buttonLogin";
 
 import CustomizedInputBase from "../buttonSearch";
 
@@ -15,6 +14,8 @@ export default function HeaderBar() {
     navigate("/");
     // window.location.href = window.location.href;
   };
+
+  const user = auth.user?.password;
 
   return (
     <Box

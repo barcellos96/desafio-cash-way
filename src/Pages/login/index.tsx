@@ -27,8 +27,8 @@ export const Login = () => {
   } = useForm();
   const onSubmitFunction = () => {
     auth.Login(account, password, holder);
+
     navigate("/dashboard");
-    console.log({ account, password, holder });
   };
 
   return (
@@ -96,7 +96,6 @@ export const Login = () => {
               }}
               {...register("account", {
                 required: true,
-                maxLength: 30,
                 onChange(e) {
                   setAccount(e.target.value);
                 },
@@ -128,7 +127,6 @@ export const Login = () => {
               }}
               {...register("password", {
                 required: true,
-                maxLength: 30,
                 onChange(e) {
                   setPassword(e.target.value);
                 },
@@ -153,6 +151,7 @@ export const Login = () => {
               id="holder-id"
               label="Holder"
               variant="standard"
+              autoComplete="false"
               sx={{ m: 1, width: "100%", marginBottom: "20px" }}
               {...register("holder", {
                 required: true,

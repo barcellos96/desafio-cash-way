@@ -30,7 +30,7 @@ function TabPanel(props: TabPanelProps) {
   );
 }
 
-function a11yProps(index: number) {
+function allProps(index: number) {
   return {
     id: `simple-tab-${index}`,
     "aria-controls": `simple-tabpanel-${index}`,
@@ -59,19 +59,19 @@ export default function BasicTabs() {
           onChange={handleChange}
           aria-label="basic tabs example"
         >
-          <Tab label="Item One" {...a11yProps(0)} />
-          <Tab label="Item Two" {...a11yProps(1)} />
-          <Tab label="Item Three" {...a11yProps(2)} />
+          <Tab label="7 dias" {...allProps(0)} />
+          <Tab label="15 dias" {...allProps(1)} />
+          <Tab label="30 dias" {...allProps(2)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        Item One
+        TRANSAÇÕES DE ATÉ 7 DIAS
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        TRANSAÇÕES DE ATÉ 15 DIAS
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        TRANSAÇÕES DE ATÉ 30DIAS
       </TabPanel>
     </Box>
   );

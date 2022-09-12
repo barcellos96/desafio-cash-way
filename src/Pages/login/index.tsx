@@ -89,7 +89,6 @@ export const Login = () => {
               id="account-id"
               label="Conta"
               variant="standard"
-              value={account}
               sx={{
                 m: 1,
                 width: "100%",
@@ -104,7 +103,19 @@ export const Login = () => {
               })}
             />
             {errors.account && errors.account.type === "required" && (
-              <span role="alert">Campo obrigatório</span>
+              <Box
+                component="p"
+                role="alert"
+                sx={{
+                  display: "flex",
+                  color: "red",
+                  width: "100%",
+                  marginTop: "-12px",
+                  paddingBottom: 2,
+                }}
+              >
+                Campo obrigatório
+              </Box>
             )}
             <TextField
               id="senha-id"
@@ -124,7 +135,19 @@ export const Login = () => {
               })}
             />
             {errors.password && errors.password.type === "required" && (
-              <span role="alert">Campo obrigatório</span>
+              <Box
+                component="p"
+                role="alert"
+                sx={{
+                  display: "flex",
+                  color: "red",
+                  width: "100%",
+                  marginTop: "-12px",
+                  paddingBottom: 2,
+                }}
+              >
+                Campo obrigatório
+              </Box>
             )}
             <TextField
               id="holder-id"
@@ -140,7 +163,19 @@ export const Login = () => {
               })}
             />
             {errors.holder && errors.holder.type === "required" && (
-              <span role="alert">Campo obrigatório</span>
+              <Box
+                component="p"
+                role="alert"
+                sx={{
+                  display: "flex",
+                  color: "red",
+                  width: "100%",
+                  marginTop: "-12px",
+                  paddingBottom: 2,
+                }}
+              >
+                Campo obrigatório
+              </Box>
             )}
             <BootstrapButton type="submit">Fazer Login</BootstrapButton>
           </Box>

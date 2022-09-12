@@ -1,7 +1,8 @@
-import { Box, Avatar } from "@mui/material";
+import { Box, Avatar, Button, TextField } from "@mui/material";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "../../providers/login";
+import { BootstrapButton } from "../buttonLogin";
 
 import CustomizedInputBase from "../buttonSearch";
 
@@ -29,14 +30,42 @@ export default function HeaderBar() {
       }}
     >
       <CustomizedInputBase />
-      <Avatar
+      <Box
         sx={{
-          height: "45px",
-          width: "45px",
-          cursor: "pointer",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          width: "10%",
         }}
-      />
-      <button onClick={handleLogout}>sair</button>
+      >
+        <Avatar
+          sx={{
+            height: "45px",
+            width: "45px",
+            cursor: "pointer",
+          }}
+        />
+        <Box
+          component="a"
+          sx={{
+            margin: "0 auto",
+            borderRadius: 1,
+            color: "#504d4d",
+            alignText: "start",
+            fontSize: "20px",
+            fontWeight: "bold",
+            textTransform: "none",
+            cursor: "pointer",
+            "&:hover": {
+              textDecoration: "underline",
+            },
+          }}
+          onClick={handleLogout}
+        >
+          sair
+        </Box>
+      </Box>
     </Box>
   );
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { Theme, createStyles, makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
+import SvgIconsSize from "../iconsCard";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -25,9 +26,15 @@ export default function SimplePaper() {
 
   return (
     <div className={classes.root}>
-      <Paper elevation={3}></Paper>
-      <Paper elevation={3}></Paper>
-      <Paper elevation={3}></Paper>
+      <Paper elevation={3}>
+        <SvgIconsSize />
+      </Paper>
+      <Paper elevation={3}>
+        <SvgIconsSize />
+      </Paper>
+      <Paper elevation={3}>
+        <SvgIconsSize />
+      </Paper>
     </div>
   );
 }

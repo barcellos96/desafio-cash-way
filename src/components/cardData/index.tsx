@@ -7,10 +7,14 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       display: "flex",
       flexWrap: "wrap",
+      width: "93%",
+      marginLeft: "3%",
+
       "& > *": {
-        margin: theme.spacing(2),
-        width: theme.spacing(50),
-        height: theme.spacing(35),
+        margin: theme.spacing(3),
+        width: "28%",
+        minWidth: "250px",
+        height: theme.spacing(25),
       },
     },
   })
@@ -21,7 +25,9 @@ export default function SimplePaper() {
 
   return (
     <div className={classes.root}>
-      <Paper elevation={3} />
+      <Paper elevation={3}></Paper>
+      <Paper elevation={3}></Paper>
+      <Paper elevation={3}></Paper>
     </div>
   );
 }

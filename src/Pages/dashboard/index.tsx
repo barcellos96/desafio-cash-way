@@ -4,6 +4,7 @@ import { items } from "../../components/itemsButtonSideBar";
 import Logo from "../../assets/logo.svg";
 import HeaderBar from "../../components/headerBar";
 import SimplePaper from "../../components/cardData";
+import BasicTabs from "../../components/listStatements";
 
 const DashboardPage: React.FC = () => {
   return (
@@ -59,6 +60,7 @@ const DashboardPage: React.FC = () => {
       <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
         <HeaderBar />
         <SimplePaper />
+        <BasicTabs />
       </Box>
     </Box>
   );

@@ -1,14 +1,9 @@
-import { createContext, ReactNode, useContext, useState } from "react";
+import { createContext, ReactNode } from "react";
 import { useApi } from "../../hooks/useApi";
 import { Login } from "../../Pages/login";
-import { LoginContext } from "../login";
 
 interface IChildrenReact {
   children: ReactNode;
-}
-interface IStatementsData {
-  total_debits: number;
-  total_credits: number;
 }
 
 interface IDashboardData {
@@ -21,12 +16,10 @@ export const DashboardContext = createContext<IDashboardData>(
 
 export const DashboardProviders = ({ children }: IChildrenReact) => {
   const api = useApi();
-  const [lastMonth, setLastMonth] = useState<IStatementsData>();
 
-  async function LastMonthStatements(data: IStatementsData) {
-    const dataLastMonth = await api.StatementsLastMonth(data);
-    console.log(dataLastMonth);
-    setLastMonth(dataLastMonth);
+  async function LastMonthStatements() {
+    const dataLastMonth = await api.StatementsLastMonth();
+    return dataLastMonth;
   }
 
   if (!localStorage.getItem("token")) {
@@ -34,7 +27,7 @@ export const DashboardProviders = ({ children }: IChildrenReact) => {
   }
 
   return (
-    <DashboardContext.Provider value={{ lastMonth, LastMonthStatements }}>
+    <DashboardContext.Provider value={{ LastMonthStatements }}>
       {children}
     </DashboardContext.Provider>
   );

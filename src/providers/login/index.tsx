@@ -33,8 +33,8 @@ export const LoginProviders = ({ children }: IChildrenReact) => {
     if (dataUser.data && dataUser.headers["access-token"]) {
       setUser(dataUser.data);
       setToken(
-        dataUser.headers["uid"],
-        dataUser.headers["client"],
+        dataUser.headers.uid,
+        dataUser.headers.client,
         dataUser.headers["access-token"]
       );
       return true;
@@ -48,10 +48,11 @@ export const LoginProviders = ({ children }: IChildrenReact) => {
     await api.Logout();
   }
 
-  const setToken = (token: string, uid: string, client: string) => {
-    localStorage.setItem("token", token);
+  const setToken = (uid: string, client: string, token: string) => {
     localStorage.setItem("uid", uid);
     localStorage.setItem("client", client);
+    localStorage.setItem("token", token);
+
   };
 
   return (

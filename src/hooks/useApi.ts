@@ -27,19 +27,23 @@ export const useApi = () => ({
 
   StatementsLastMonth: async () => {
     const getUid: any = localStorage.getItem("uid") || [];
+    console.log("getUid ", getUid);
     const getClient: any = localStorage.getItem("client") || [];
+    console.log("getClient ", getClient);
     const getToken: any = localStorage.getItem("token") || [];
+    console.log("getToken ", getToken);
 
     const response = await api
       .get("statements/last_month_total_credits_and_debits", {
         headers: {
-          uid: getUid,
-          client: getClient,
-          "access-token": getToken,
+          "uid": getUid,
+          "client": getClient,
+          "access-token": getToken 
         },
       })
-      .then((res) => res)
+      .then((res) => res.data)
       .catch((err) => err);
+    console.log(response);
     return response;
   },
 });

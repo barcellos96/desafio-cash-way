@@ -4,7 +4,6 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { DashboardContext } from "../../providers/dashboard";
-import { LoginContext } from "../../providers/login";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -40,9 +39,11 @@ function allProps(index: number) {
 }
 
 export default function BasicTabs() {
+  const { LastMonthStatements } = React.useContext(DashboardContext);
   const [value, setValue] = React.useState(0);
-  const authDashboard = React.useContext(DashboardContext);
+  const [teste, setTeste] = React.useState(LastMonthStatements)
 
+  console.log(teste)
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
@@ -68,13 +69,13 @@ export default function BasicTabs() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        {authDashboard.LastMonthStatements(authDashboard.lastMonth)}
+        {teste ? teste.total_debits : "teste não renderizou"}
       </TabPanel>
       <TabPanel value={value} index={1}>
-        TRANSAÇÕES DE ATÉ 15 DIAS
+      {teste ? teste.total_debits : "teste não renderizou"}
       </TabPanel>
       <TabPanel value={value} index={2}>
-        TRANSAÇÕES DE ATÉ 30DIAS
+      {teste ? teste.total_debits : "teste não renderizou"}
       </TabPanel>
     </Box>
   );

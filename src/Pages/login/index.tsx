@@ -1,7 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
+
+import * as yup from "yup";
 import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useNavigate } from "react-router-dom";
-import { LoginContext } from "../../providers/login";
+import { IUser, LoginContext } from "../../providers/login";
 import { BootstrapButton } from "../../components/buttonLogin";
 import {
   TextField,
@@ -11,26 +14,32 @@ import {
   FormControlLabel,
 } from "@mui/material";
 import Logo from "../../assets/logo.svg";
+import DashboardPage from "../dashboard";
 
 export const Login = () => {
   const auth = useContext(LoginContext);
   const navigate = useNavigate();
 
-  const [account, setAccount] = useState("");
-  const [password, setPassword] = useState("");
-  const [holder, setHolder] = useState("");
+  const schema = yup.object().shape({
+    account: yup.string().required("Campo obrigatório!"),
+    password: yup.string().required("Campo obrigatório!"),
+    holder: yup.string().required("Campo obrigatório!"),
+  });
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
-  const onSubmitFunction = () => {
-    auth.Login(account, password, holder);
+  } = useForm<IUser>({ resolver: yupResolver(schema) });
 
+  const onSubmitFunction = (data: IUser) => {
+    auth.Login(data);
     navigate("/dashboard");
   };
 
+  if (localStorage.getItem("token")) {
+    return <DashboardPage />;
+  }
   return (
     <Box
       sx={{
@@ -76,7 +85,7 @@ export const Login = () => {
           Coloque suas credenciais
         </Typography>
 
-        <form onClick={handleSubmit(onSubmitFunction)}>
+        <form>
           <Box
             sx={{
               display: "flex",
@@ -94,14 +103,9 @@ export const Login = () => {
                 width: "100%",
                 marginBottom: "20px",
               }}
-              {...register("account", {
-                required: true,
-                onChange(e) {
-                  setAccount(e.target.value);
-                },
-              })}
+              {...register("account")}
             />
-            {errors.account && errors.account.type === "required" && (
+            {/* {errors.account && errors.account.type === "required" && (
               <Box
                 component="p"
                 role="alert"
@@ -115,7 +119,7 @@ export const Login = () => {
               >
                 Campo obrigatório
               </Box>
-            )}
+            )} */}
             <TextField
               id="senha-id"
               label="Senha"
@@ -125,14 +129,9 @@ export const Login = () => {
                 width: "100%",
                 marginBottom: "20px",
               }}
-              {...register("password", {
-                required: true,
-                onChange(e) {
-                  setPassword(e.target.value);
-                },
-              })}
+              {...register("password")}
             />
-            {errors.password && errors.password.type === "required" && (
+            {/* {errors.password && errors.password.type === "required" && (
               <Box
                 component="p"
                 role="alert"
@@ -146,22 +145,16 @@ export const Login = () => {
               >
                 Campo obrigatório
               </Box>
-            )}
+            )} */}
             <TextField
               id="holder-id"
               label="Holder"
               variant="standard"
               autoComplete="false"
               sx={{ m: 1, width: "100%", marginBottom: "20px" }}
-              {...register("holder", {
-                required: true,
-                maxLength: 30,
-                onChange(e) {
-                  setHolder(e.target.value);
-                },
-              })}
+              {...register("holder")}
             />
-            {errors.holder && errors.holder.type === "required" && (
+            {/* {errors.holder && errors.holder.type === "required" && (
               <Box
                 component="p"
                 role="alert"
@@ -175,8 +168,13 @@ export const Login = () => {
               >
                 Campo obrigatório
               </Box>
-            )}
-            <BootstrapButton type="submit">Fazer Login</BootstrapButton>
+            )} */}
+            <BootstrapButton
+              type="submit"
+              onClick={handleSubmit(onSubmitFunction)}
+            >
+              Fazer Login
+            </BootstrapButton>
           </Box>
         </form>
 

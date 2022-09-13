@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Button, ListItem } from "@mui/material";
 import { items } from "../../components/itemsButtonSideBar";
 import Logo from "../../assets/logo.svg";
@@ -6,7 +5,7 @@ import HeaderBar from "../../components/headerBar";
 import SimplePaper from "../../components/cardData";
 import BasicTabs from "../../components/listStatements";
 
-const DashboardPage: React.FC = () => {
+const DashboardPage = () => {
   return (
     <Box
       sx={{

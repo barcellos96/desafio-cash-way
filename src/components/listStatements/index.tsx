@@ -3,6 +3,8 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
+import { DashboardContext } from "../../providers/dashboard";
+import { LoginContext } from "../../providers/login";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -39,6 +41,7 @@ function allProps(index: number) {
 
 export default function BasicTabs() {
   const [value, setValue] = React.useState(0);
+  const authDashboard = React.useContext(DashboardContext);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -65,7 +68,7 @@ export default function BasicTabs() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        TRANSAÇÕES DE ATÉ 7 DIAS
+        {authDashboard.LastMonthStatements(authDashboard.lastMonth)}
       </TabPanel>
       <TabPanel value={value} index={1}>
         TRANSAÇÕES DE ATÉ 15 DIAS

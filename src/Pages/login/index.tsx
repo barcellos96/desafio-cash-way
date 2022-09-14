@@ -16,6 +16,10 @@ import {
 import Logo from "../../assets/logo.svg";
 import DashboardPage from "../dashboard";
 
+import { ToastContainer } from 'react-toastify';
+
+  import 'react-toastify/dist/ReactToastify.css';
+
 export const Login = () => {
   const auth = useContext(LoginContext);
   const navigate = useNavigate();
@@ -33,13 +37,15 @@ export const Login = () => {
   } = useForm<IUser>({ resolver: yupResolver(schema) });
 
   const onSubmitFunction = (data: IUser) => {
-    auth.Login(data);
+    auth.Login(data);   
     navigate("/dashboard");
   };
 
   if (localStorage.getItem("token")) {
     return <DashboardPage />;
   }
+
+
   return (
     <Box
       sx={{
@@ -105,7 +111,7 @@ export const Login = () => {
               }}
               {...register("account")}
             />
-            {/* {errors.account && errors.account.type === "required" && (
+            {errors.account && errors.account.type === "required" && (
               <Box
                 component="p"
                 role="alert"
@@ -119,7 +125,7 @@ export const Login = () => {
               >
                 Campo obrigatório
               </Box>
-            )} */}
+            )}
             <TextField
               id="senha-id"
               label="Senha"
@@ -131,7 +137,7 @@ export const Login = () => {
               }}
               {...register("password")}
             />
-            {/* {errors.password && errors.password.type === "required" && (
+             {errors.password && errors.password.type === "required" && (
               <Box
                 component="p"
                 role="alert"
@@ -145,7 +151,7 @@ export const Login = () => {
               >
                 Campo obrigatório
               </Box>
-            )} */}
+            )} 
             <TextField
               id="holder-id"
               label="Holder"
@@ -154,7 +160,7 @@ export const Login = () => {
               sx={{ m: 1, width: "100%", marginBottom: "20px" }}
               {...register("holder")}
             />
-            {/* {errors.holder && errors.holder.type === "required" && (
+            {errors.holder && errors.holder.type === "required" && (
               <Box
                 component="p"
                 role="alert"
@@ -168,13 +174,23 @@ export const Login = () => {
               >
                 Campo obrigatório
               </Box>
-            )} */}
+            )} 
             <BootstrapButton
               type="submit"
               onClick={handleSubmit(onSubmitFunction)}
             >
               Fazer Login
             </BootstrapButton>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                pauseOnHover
+            />
           </Box>
         </form>
 

@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useState } from "react";
 import { useApi } from "../../hooks/useApi";
 
+
 interface IChildrenReact {
   children: ReactNode;
 }
@@ -25,10 +26,13 @@ export const LoginProviders = ({ children }: IChildrenReact) => {
   const [headers, setHeaders] = useState({});
   const api = useApi();
 
-  async function Login(data: IUser) {
+
+
+  async function Login(data: IUser) {    
     const dataUser = await api.Login(data);
     api.validationToken(dataUser.headers);
     setHeaders(dataUser.headers);
+    
 
     if (dataUser.data && dataUser.headers["access-token"]) {
       setUser(dataUser.data);
@@ -37,18 +41,20 @@ export const LoginProviders = ({ children }: IChildrenReact) => {
         dataUser.headers.client,
         dataUser.headers["access-token"]
       );
+
       return true;
-    }
+    } 
     return false;
   }
 
   async function Logout() {
     setUser(null);
-    setToken("", "", "");
+    localStorage.clear()
     await api.Logout();
   }
 
   const setToken = (uid: string, client: string, token: string) => {
+
     localStorage.setItem("uid", uid);
     localStorage.setItem("client", client);
     localStorage.setItem("token", token);
@@ -61,7 +67,7 @@ export const LoginProviders = ({ children }: IChildrenReact) => {
         user,
         headers,
         Login,
-        Logout,
+        Logout
       }}
     >
       {children}

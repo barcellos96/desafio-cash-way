@@ -59,6 +59,7 @@ export default function HeaderBar() {
             textTransform: "none",
             cursor: "pointer",
             "&:hover": {
+              color: "#a62424",
               textDecoration: "underline",
             },
           }}

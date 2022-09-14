@@ -1,7 +1,9 @@
 import Application from "./Routes/route";
 
+
 function App() {
-  return <Application />;
+  return <Application />
+     
 }
 
 export default App;

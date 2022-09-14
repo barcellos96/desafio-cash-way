@@ -4,6 +4,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { DashboardContext } from "../../providers/dashboard";
+import { useApi } from "../../hooks/useApi";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -38,12 +39,34 @@ function allProps(index: number) {
   };
 }
 
-export default function BasicTabs() {
-  const { LastMonthStatements } = React.useContext(DashboardContext);
-  const [value, setValue] = React.useState(0);
-  const [teste, setTeste] = React.useState(LastMonthStatements)
+interface Idebits_and_credits {
+  total_debits: number;
+  total_credits: number
+}
 
-  console.log(teste)
+export default function BasicTabs() {
+  const [value, setValue] = React.useState(0);
+  const [dataLastMonth, setDataLastMonth] = React.useState<Idebits_and_credits | null>(null)
+  const [dataLastFifTeenDays, setDataLastFifTeenDays] = React.useState<Idebits_and_credits | null>(null)
+  const [dataLastSevenDays, setDataLastSevenDays] = React.useState<Idebits_and_credits | null>(null)
+
+  const api = useApi()
+
+  React.useEffect(()  => {
+    const execLastTotalData = async () => {
+    
+      const LastMonth = await api.StatementsLastMonth();
+      setDataLastMonth(LastMonth)
+    
+      const FifTeenDays = await api.StatementsLastFifteenDays();
+      setDataLastFifTeenDays(FifTeenDays)
+
+      const SevenDaysMonth = await api.StatementsLastSevenDays();
+      setDataLastSevenDays(SevenDaysMonth)
+    }
+    execLastTotalData()
+  },[])
+
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
@@ -66,16 +89,27 @@ export default function BasicTabs() {
           <Tab label="7 dias" {...allProps(0)} />
           <Tab label="15 dias" {...allProps(1)} />
           <Tab label="30 dias" {...allProps(2)} />
+          <Tab label="Periodo " {...allProps(3)} />
+
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
-        {teste ? teste.total_debits : "teste não renderizou"}
+      {dataLastSevenDays ? <span>Total de débitos(período 7 dias):R${dataLastSevenDays.total_debits}</span> : "teste não renderizou"}<br/>
+      {dataLastSevenDays ? <span>Total de débitos(período 7 dias):R${dataLastSevenDays.total_credits}</span> : "teste não renderizou"}
+
       </TabPanel>
       <TabPanel value={value} index={1}>
-      {teste ? teste.total_debits : "teste não renderizou"}
+      {dataLastFifTeenDays ? <span>Total de débitos(período 15 dias):R${dataLastFifTeenDays.total_debits}</span> : "teste não renderizou"}<br/>
+      {dataLastFifTeenDays ? <span>Total de débitos(período 15 dias):R${dataLastFifTeenDays.total_credits}</span> : "teste não renderizou"}
+
       </TabPanel>
       <TabPanel value={value} index={2}>
-      {teste ? teste.total_debits : "teste não renderizou"}
+      {dataLastMonth ? <span>Total de débitos(período 30 dias):R${dataLastMonth.total_debits}</span> : "teste não renderizou"}<br/>
+      {dataLastMonth ? <span>Total de débitos(período 30 dias):R${dataLastMonth.total_credits}</span> : "teste não renderizou"}
+      </TabPanel>
+
+      <TabPanel value={value} index={3}>
+      
       </TabPanel>
     </Box>
   );

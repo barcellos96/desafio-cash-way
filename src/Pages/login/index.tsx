@@ -76,7 +76,7 @@ export const Login = () => {
           variant="h5"
           sx={{ fontWeight: "bold", marginTop: "10px", color: "#369293" }}
         >
-          Olá, Sejam bem-vindo!
+          Olá, Seja bem-vindo!
         </Typography>
         <Typography
           variant="subtitle1"

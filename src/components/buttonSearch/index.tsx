@@ -27,7 +27,7 @@ export default function CustomizedInputBase() {
       <SearchIcon />
       <InputBase
         className={classes.input}
-        placeholder="pesquise algo"
+        placeholder="Busca..."
         inputProps={{ "aria-label": "pesquise algo" }}
       />
     </Paper>

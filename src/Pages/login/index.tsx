@@ -154,7 +154,7 @@ export const Login = () => {
             )} 
             <TextField
               id="holder-id"
-              label="Holder"
+              label="Titular"
               variant="standard"
               autoComplete="false"
               sx={{ m: 1, width: "100%", marginBottom: "20px" }}
